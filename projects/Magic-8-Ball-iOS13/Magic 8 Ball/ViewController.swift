@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
 
     @IBAction func askButtonPressed(_ sender: UIButton) {
-        imageView.image = UIImage(named:"ball3")
+        imageView.image = ballArray.randomElement()//UIImage(named:"ball3")
     }
 }
 
