@@ -30,6 +30,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func keyPressed(_ sender: UIButton) {
+        
+        print((sender.currentTitle) ?? <#default value#>)
+        
         // Check if the audio player is not nil
         if let player = audioPlayer {
             // Stop the currently playing sound
@@ -43,7 +46,7 @@ class ViewController: UIViewController {
             player.play()
         }
     }
-    
+
 
 }
 
