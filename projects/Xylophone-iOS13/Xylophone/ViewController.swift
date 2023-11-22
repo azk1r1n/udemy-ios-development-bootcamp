@@ -11,30 +11,34 @@ import AVFoundation
 
 
 class ViewController: UIViewController {
-    var audioPlayer: AVAudioPlayer?
+    var player: AVAudioPlayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Get the URL of the sound file
-        if let soundURL = Bundle.main.url(forResource: "C", withExtension: "wav") {
-            do {
-                // Initialize the audio player with the sound file URL
-                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            } catch {
-                print("Error loading sound file: \(error.localizedDescription)")
-            }
-        } else {
-            print("Sound file not found in the Sounds directory.")
-        }
     }
 
     @IBAction func keyPressed(_ sender: UIButton) {
         
-        print((sender.currentTitle) ?? <#default value#>)
+        print((sender.currentTitle) ?? "C")
+        
+        sender.alpha = 0.5
+        playsound(buttonName: sender.currentTitle ?? "C")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
+            UIView.animate(withDuration: 0.1) {
+                sender.alpha = 1.0
+            }
+        }
+       
+    }
+    
+    func playsound(buttonName: String){
+        let url = Bundle.main.url(forResource: buttonName, withExtension: "wav")
+        player = try! AVAudioPlayer(contentsOf: url!)
         
         // Check if the audio player is not nil
-        if let player = audioPlayer {
+        if let player = player {
             // Stop the currently playing sound
             if player.isPlaying {
                 player.stop()
@@ -46,7 +50,6 @@ class ViewController: UIViewController {
             player.play()
         }
     }
-
 
 }
 
